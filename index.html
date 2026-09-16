@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tap The Box Game</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 25px;
+        }
+
+        #score {
+            font-size: 25px;
+            margin: 15px;
+        }
+
+        #game {
+            width: 95%;
+            max-width: 500px;
+            height: 500px;
+            margin: auto;
+            background: #222;
+            border: 3px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box {
+            width: 60px;
+            height: 60px;
+            background: red;
+            position: absolute;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            margin: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎮 Tap The Box</h1>
+
+    <div id="score">
+        Score: <span id="points">0</span>
+    </div>
+
+    <div id="game">
+        <div id="box"></div>
+    </div>
+
+    <button onclick="restartGame()">Restart</button>
+
+    <script>
+        let score = 0;
+
+        const box = document.getElementById("box");
+        const game = document.getElementById("game");
+        const points = document.getElementById("points");
+
+        function moveBox() {
+
+            let maxX = game.clientWidth - box.clientWidth;
+            let maxY = game.clientHeight - box.clientHeight;
+
+            let x = Math.random() * maxX;
+            let y = Math.random() * maxY;
+
+            box.style.left = x + "px";
+            box.style.top = y + "px";
+        }
+
+        box.addEventListener("click", function() {
+
+            score++;
+
+            points.textContent = score;
+
+            moveBox();
+        });
+
+        function restartGame() {
+
+            score = 0;
+
+            points.textContent = score;
+
+            moveBox();
+        }
+
+        moveBox();
+    </script>
+
+</body>
+</html>
